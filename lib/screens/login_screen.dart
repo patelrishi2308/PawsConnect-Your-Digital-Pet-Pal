@@ -9,16 +9,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    FirebaseAuth.instance
-    .authStateChanges()
-    .listen((User user) {
-      if (user == null) {
-        print('User is currently signed out');
-      }else{
-        Navigator.pushReplacementNamed(context, LocationScreen.id);
-      }
-    });
-
     return Scaffold(
       backgroundColor: Colors.cyan.shade900,
       body: Column(

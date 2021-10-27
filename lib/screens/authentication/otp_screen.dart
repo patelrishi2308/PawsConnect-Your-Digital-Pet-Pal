@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pet_adoption/screens/authentication/phoneauth_screen.dart';
 import 'package:pet_adoption/screens/location_screen.dart';
+import 'package:pet_adoption/services/phoneauth_service.dart';
 
 class OTPScreen extends StatefulWidget {
   final String number,verId;
@@ -16,6 +17,9 @@ class _OTPScreenState extends State<OTPScreen> {
 
   bool _loading = false;
   String error ='' ;
+
+  PhoneAuthService _services =PhoneAuthService();
+
 
   var _text1 = TextEditingController();
   var _text2 = TextEditingController();
@@ -33,7 +37,8 @@ class _OTPScreenState extends State<OTPScreen> {
       final User user = (await _auth.signInWithCredential(credential)).user;
 
       if(user!=null){
-        Navigator.pushReplacementNamed(context, LocationScreen.id);
+
+        _services.addUser(context);
       }else{
         print('Login Failed');
         if(mounted){
