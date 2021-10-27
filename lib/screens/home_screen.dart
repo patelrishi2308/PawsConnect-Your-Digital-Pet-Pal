@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String address = 'India';
-  
+
   Future<String>getAddress()async{
 
     final coordinates = new Coordinates(1.10, 45.50);
@@ -42,22 +42,31 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         elevation: 0.0,
 
-        title: Row(
-          children: [
-            Icon(
-              CupertinoIcons.location_solid,
-              color: Colors.black,
-              size: 18,
+        title: InkWell(
+          onTap: (){},
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8,bottom: 8),
+              child: Row(
+                children: [
+                  Icon(
+                    CupertinoIcons.location_solid,
+                    color: Colors.black,
+                    size: 18,
+                  ),
+                  Text(
+                    address,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black,size: 18,),
+                ],
+              ),
             ),
-            Text(
-              address,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold),
-            ),
-            Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black,),
-          ],
+          ),
         ),
       ),
       body: Center(child: Text('Home Screen'),),
