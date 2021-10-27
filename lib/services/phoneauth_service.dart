@@ -10,18 +10,27 @@ class PhoneAuthService{
   User user = FirebaseAuth.instance.currentUser;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-  Future<void> addUser(context) {
+  Future<void> addUser(context) async{
 
-    return users
-        .add({
-      'uid': user.uid,
-      'mobile' : user.phoneNumber,
-      'email': user.email
-    })
-        .then((value) {
-          Navigator.pushReplacementNamed(context, LocationScreen.id);
-    })
-        .catchError((error) => print("Failed to add user: $error"));
+    final QuerySnapshot result = await users.where('uid',isEqualTo: user.uid).get();
+
+    List<DocumentSnapshot> document = result.docs;
+
+    if(document.length>0){
+      Navigator.pushReplacementNamed(context, LocationScreen.id);
+    }else{
+      return users.doc(user.uid)
+          .set({
+        'uid': user.uid,
+        'mobile' : user.phoneNumber,
+        'email': user.email
+      })
+          .then((value) {
+        Navigator.pushReplacementNamed(context, LocationScreen.id);
+      })
+          .catchError((error) => print("Failed to add user: $error"));
+    }
+
   }
 
   Future<void>verifyPhoneNumber(BuildContext context,number)async{
