@@ -37,6 +37,7 @@ dependencies:
   cloud_firestore: ^2.5.4
   legacy_progress_dialog: ^0.0.9
   location: ^4.3.0
+  geocoder: ^0.2.1
 
 dev_dependencies:
   flutter_test:

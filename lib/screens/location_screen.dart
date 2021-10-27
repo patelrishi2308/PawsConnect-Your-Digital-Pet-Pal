@@ -14,6 +14,7 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
 
+  bool _loading = false;
   Location location = new Location();
 
   bool _serviceEnabled;
@@ -76,7 +77,9 @@ class _LocationScreenState extends State<LocationScreen> {
             child: Row(
               children: [
                 Expanded(
-                  child: ElevatedButton.icon(
+                  child: _loading ? Center(child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+                  )): ElevatedButton.icon(
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Theme.of(context).primaryColor)
@@ -89,6 +92,9 @@ class _LocationScreenState extends State<LocationScreen> {
                       ),
                     ),
                     onPressed: (){
+                      setState(() {
+                        _loading = true;
+                      });
                       getLocation().then((value) {
                         print(_locationData.latitude);
 
