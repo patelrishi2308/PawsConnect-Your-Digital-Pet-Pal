@@ -14,9 +14,13 @@ class AuthUi extends StatelessWidget {
           SizedBox(
             width: 220,
             child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white)
-              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(3.0),
+
+              ),),
+
               onPressed: () {
                 Navigator.pushNamed(context, PhoneAuthScreen.id);
               },

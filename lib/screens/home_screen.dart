@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:location/location.dart';
+import 'package:pet_adoption/screens/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home-screen';
@@ -19,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<String>getAddress()async{
 
-    final coordinates = new Coordinates(1.10, 45.50);
+    final coordinates = new Coordinates(widget.locationData.latitude, widget.locationData.longitude);
     var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
     var first = addresses.first;
     setState(() {
@@ -55,12 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.black,
                     size: 18,
                   ),
-                  Text(
-                    address,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold),
+                  Flexible(
+                    child: Text(
+                      address,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   Icon(Icons.keyboard_arrow_down_outlined,color: Colors.black,size: 18,),
                 ],
@@ -69,7 +73,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Center(child: Text('Home Screen'),),
+      body: Center(
+        child: ElevatedButton(child: Text('Sign Out',),onPressed: (){
+          FirebaseAuth.instance.signOut().then((value){
+            Navigator.pushReplacementNamed(context, LoginScreen.id);
+          });
+        },),
+      ),
     );
   }
 }
