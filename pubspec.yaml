@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.13.4 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -38,8 +38,7 @@ dependencies:
   legacy_progress_dialog: ^0.0.9
   location: ^4.3.0
   geocoder: ^0.2.1
-#  geocode: 1.0.1
-  google_sign_in: ^5.2.0
+  google_sign_in: ^5.0.2
 
 dev_dependencies:
   flutter_test:

@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: ElevatedButton(child: Text('Sign Out',),onPressed: (){
-          FirebaseAuth.instance.signOut().then((value){
+          FirebaseAuth.instance.signOut().then((value) {
             Navigator.pushReplacementNamed(context, LoginScreen.id);
           });
         },),
